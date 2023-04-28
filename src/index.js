@@ -30,7 +30,7 @@ const createGallery = () => {
     .then(response => {
       if (response.data.hits.length > 0 && inputEl.value !== '') {
         clear();
-        createMarkup(response);
+        galleryEl.innerHTML = createMarkup(response);
 
         Notiflix.Notify.success(
           'Hooray! We found ' + response.data.totalHits + ' images.'
@@ -54,7 +54,7 @@ const clear = () => {
 };
 
 const createMarkup = response => {
-  const markup = response.data.hits
+  return response.data.hits
     .map(hit => {
       return `<div class="photo-card">
         <img src="${hit.webformatURL}" alt="${hit.tags}" loading="lazy" />
@@ -75,8 +75,6 @@ const createMarkup = response => {
       </div>`;
     })
     .join('');
-
-  galleryEl.innerHTML = markup;
 };
 
 const loadMore = () => {
@@ -87,6 +85,5 @@ const loadMore = () => {
 };
 
 LoadBtnEl.addEventListener('click', event => {
-  event.preventDefault();
   loadMore();
 });
