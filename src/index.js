@@ -26,8 +26,9 @@ const fetchPhotosData = async () => {
   });
 };
 
+let page = 1;
+
 const createGallery = () => {
-  page = 1;
   fetchPhotosData()
     .then(response => {
       if (response.data.hits.length > 0 && inputEl.value !== '') {
